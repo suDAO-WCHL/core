@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import WalletConnectButton from '../WalletConnectButton';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '@/assets/logos/SUDAOWhite.png';
+import { useHasAnimated } from '@/hooks/useHasAnimated';
 
 const NavbarSUDAO: React.FC = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -15,6 +16,9 @@ const NavbarSUDAO: React.FC = () => {
         }
         return location.pathname.includes(path);
     };
+    const { hasAnimated } = useHasAnimated();
+    const originalNavDelay = 3.5; 
+    const navDelay = hasAnimated ? 0 : originalNavDelay;
     
     const handleLinkClick = () => {
         // Smooth scroll to top when navigating
@@ -28,20 +32,22 @@ const NavbarSUDAO: React.FC = () => {
         <>
             {/* Navigation */}
             <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="fixed top-0 left-0 right-0 z-40 px-20 py-4 bg-black/80 backdrop-blur-sm"
+                initial={{ opacity: 0, x: 573 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: navDelay, ease: ["easeInOut"] }}
+                className="fixed top-0 left-0 right-0 z-40 px-20 py-4 bg-black/30 backdrop-blur-sm"
             >
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
                         <Link  
                             to="/" 
                             onClick={handleLinkClick}
+                            className='text-white flex justify-center items-center font-semibold'
                         >
                             <div className="w-10 h-10">
                                 <img src={Logo} />
                             </div>
+                            <span className='pl-3'>SUDAO</span>
                         </Link>
                     </div>
 
@@ -50,7 +56,7 @@ const NavbarSUDAO: React.FC = () => {
                             to="/" 
                             onClick={handleLinkClick}
                             className={`transition-colors ${
-                                isActive('/') ? 'text-white font-semibold' : 'text-slate-400 hover:text-blue-200'
+                                isActive('/') ? 'text-white font-semibold' : 'text-white/80 hover:text-blue-200'
                             }`}
                         >
                             Home
@@ -59,7 +65,7 @@ const NavbarSUDAO: React.FC = () => {
                             to="/discover" 
                             onClick={handleLinkClick}
                             className={`transition-colors ${
-                                isActive('/discover') ? 'text-white font-semibold' : 'text-slate-400 hover:text-blue-200'
+                                isActive('/discover') ? 'text-white font-semibold' : 'text-white/80 hover:text-blue-200'
                             }`}
                         >
                             Discover Collectives
@@ -68,14 +74,14 @@ const NavbarSUDAO: React.FC = () => {
                             to="/plugins" 
                             onClick={handleLinkClick}
                             className={`transition-colors ${
-                                isActive('/plugins') ? 'text-white font-semibold' : 'text-slate-400 hover:text-blue-200'
+                                isActive('/plugins') ? 'text-white font-semibold' : 'text-white/80 hover:text-blue-200'
                             }`}
                         >
                             Plugin Marketplace
                         </Link>
                         <a  
                             href="https://sweet-lobster-b5f.notion.site/SUDAO-DOCUMENTATION-26fc1532f6c180fa957cd7723cff22ad" 
-                            className="transition-colors text-slate-400 hover:text-blue-200"
+                            className="transition-colors text-white/80 hover:text-blue-200"
                             target="_blank"
                         >
                             Docs

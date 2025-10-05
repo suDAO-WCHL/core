@@ -62,10 +62,10 @@ const CustomConnectButton = ({
             <div className='flex items-center z-30'>
                 <img
                     src={Logo}
-                    className="w-8 h-8 mr-2"
+                    className="w-6 h-6 mr-1"
                     alt="SUDAO Logo"
                 />
-                <span className='font-semibold'>
+                <span className='font-semibold text-sm'>
                     {buttonText}
                 </span>
             </div>
